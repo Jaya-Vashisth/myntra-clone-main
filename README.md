@@ -7,11 +7,7 @@ Welcome to Myntra Clone, a fully responsive fashion e-commerce website that mimi
 ![Logo](https://trak.in/wp-content/uploads/2017/12/Myntra-Banner-Opt-1280x720.jpg)
 
 
-## 🌐 Live Demo
 
- https://trand-tide.netlify.app/(Link to live deployment)
- 
-Note: The server takes approximately 50 seconds to spin up, so please be patient.
 
 
 ## ✨ Key Features
