@@ -5,14 +5,14 @@ import PriceDetails from "../components/PriceDetails";
 // eslint-disable-next-line no-unused-vars
 import { useEffect } from "react";
 // eslint-disable-next-line no-unused-vars
-import { loadingStatusSliceAction } from "../store/LoadingStatus";
+
 import LoadingSpinner from "../components/LoadingSpinner";
 import useGetCart from "@/hooks/GetCart";
 
 const Bag = () => {
   const { Cart } = useSelector((store) => store.cart);
 
-  const loadingStatus = useSelector((store) => store.loadingStatus); // Access loading status
+  const { loading } = useSelector((store) => store.loadingStatus); // Access loading status
 
   let totalPrice = 0;
   let totalDiscountAmt = 0;
@@ -26,7 +26,7 @@ const Bag = () => {
   return (
     <div className="bag clearfix">
       <div className="float-start">
-        {loadingStatus.loading ? (
+        {loading ? (
           <LoadingSpinner />
         ) : (
           Cart.products.map((item, index) => {

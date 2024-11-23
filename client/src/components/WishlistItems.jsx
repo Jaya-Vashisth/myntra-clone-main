@@ -1,16 +1,11 @@
 /* eslint-disable react/prop-types */
 import { PiKeyReturn } from "react-icons/pi";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { useDispatch } from "react-redux";
-import { setwishList } from "@/store/wishlistSlice.js";
-import axios from "axios";
-import { API_END_POINT } from "../../utils/constants";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { removeFromWishlist } from "@/hooks/wishlistapi";
 
 const WishlistItems = ({ item }) => {
-  const [loading, setLoading] = useState(false);
-
+  const { loading } = useSelector((store) => store.loadingStatus);
   const dispatch = useDispatch();
 
   if (loading) return <div>loading....</div>;
@@ -97,7 +92,9 @@ const WishlistItems = ({ item }) => {
             type="button"
             className="btn-close float-end"
             aria-label="Close"
-            onClick={() => removeFromWishlist(dispatch, "", item._id)}
+            onClick={() =>
+              removeFromWishlist(dispatch, "67405a48d50a3015702ba9fa", item._id)
+            }
           ></button>
         </div>
       </div>

@@ -48,7 +48,10 @@ router.delete("/clearcart", cartController.clearCart);
 /////////////////// wishlist route //////////////
 router.post("/wishlist", wishlistController.addToWishlist);
 // Remove item from wishlist
-router.delete("/wishlist/userId/itemId", wishlistController.removeFromWishlist);
+router.delete(
+  "/wishlist/:userId/:itemId",
+  wishlistController.removeFromWishlist
+);
 // Get wishlist
 router.get("/wishlist/:userId", wishlistController.getWishlist);
 
