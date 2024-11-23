@@ -97,25 +97,5 @@ npm start
 npm run dev
 ```
 
-8. Visit the application:
-Launch the live server for the home page.
 
-## 👨‍💻 Contributing
-
-Feel free to fork this repository and contribute by submitting a pull request. For major changes, please open an issue first to discuss what you'd like to change.
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Open a pull request
-
-**Please adhere to this project's `code of conduct`.**
-
-
-## 💬 Feedback & Support
-
-If you have any feedback, questions, or issues, feel free to reach out or open a GitHub Issue.
-
-
-For support, feel free to reach out via email at anish8427singh@gmail.com.
 
