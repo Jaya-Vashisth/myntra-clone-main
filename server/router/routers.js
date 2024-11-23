@@ -37,8 +37,10 @@ router.route("/logout").get(logout);
 
 ///////////////////  Cart routes   ////////////////////////////////////
 
-router.post("/addcart", cartController.addToCart);
-router.post("/removecart", cartController.removeFromCart);
+router.route("/addcart").post(cartController.addToCart);
+router
+  .route("/removecart/:userId/:itemId")
+  .delete(cartController.removeFromCart);
 router.get("/viewcart/:userId", cartController.viewCart);
 router.put("/updatecart", cartController.updateCartQuantity);
 router.delete("/clearcart", cartController.clearCart);
@@ -46,7 +48,7 @@ router.delete("/clearcart", cartController.clearCart);
 /////////////////// wishlist route //////////////
 router.post("/wishlist", wishlistController.addToWishlist);
 // Remove item from wishlist
-router.delete("/wishlist", wishlistController.removeFromWishlist);
+router.delete("/wishlist/userId/itemId", wishlistController.removeFromWishlist);
 // Get wishlist
 router.get("/wishlist/:userId", wishlistController.getWishlist);
 

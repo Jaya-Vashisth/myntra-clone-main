@@ -13,6 +13,7 @@ import myntraStore from "./store/index.js";
 import BagItems from "./components/BagItems.jsx";
 import ProductDetail from "./Routes/ProductDetail.jsx";
 import Login from "./components/auth/Login.jsx";
+import Wishlist from "./Routes/Wishlist.jsx";
 // import Signup from "./components/auth/Signup.jsx";
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
         // element: <Signup />,
       },
       { path: "/bag", element: <Bag /> },
+      {
+        path: "/wishlist",
+        element: <Wishlist />,
+      },
       { path: "/men", element: <Men /> },
       { path: "/women", element: <Women /> },
       { path: "/kids", element: <Kids /> },

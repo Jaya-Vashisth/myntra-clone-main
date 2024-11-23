@@ -45,7 +45,9 @@ const addToCart = async (req, res) => {
 // Remove item from cart
 const removeFromCart = async (req, res) => {
   try {
-    const { userId, itemId } = req.body;
+    const { userId, itemId } = req.params;
+
+    // console.log(" i am in the cart seciton ", userId);
 
     const cart = await Cart.findOne({ userId });
     if (!cart) {
@@ -54,7 +56,7 @@ const removeFromCart = async (req, res) => {
 
     //remove from cart
     const productIndex = cart.products.findIndex(
-      (product) => product.productId.toString() === itemId
+      (product) => product.productId._id.toString() === itemId
     );
 
     if (productIndex === -1) {

@@ -2,8 +2,6 @@ import { SlUser } from "react-icons/sl";
 import { IoIosHeartEmpty } from "react-icons/io";
 import { BsHandbag } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { Button } from "./ui/button";
-import { useSelector } from "react-redux";
 
 const User = () => {
   //   const { user } = useSelector((store) => store.auth);
@@ -19,7 +17,7 @@ const User = () => {
         </Link>
       </li>
       <li>
-        <Link className="user-li" to="#">
+        <Link className="user-li" to="/wishlist">
           <IoIosHeartEmpty />
           Wishlist
         </Link>

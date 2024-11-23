@@ -2,36 +2,16 @@
 import { PiKeyReturn } from "react-icons/pi";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { useDispatch } from "react-redux";
-import { setCart } from "../store/cartSlice";
+import { setwishList } from "@/store/wishlistSlice.js";
 import axios from "axios";
-import { API_END_POINT } from "../../utils/constants.js";
+import { API_END_POINT } from "../../utils/constants";
 import { useState } from "react";
+import { removeFromWishlist } from "@/hooks/wishlistapi";
 
-const BagItems = ({ item, quantity }) => {
+const WishlistItems = ({ item }) => {
   const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
-
-  // Remove item from the bag and update the wishlist marker state
-  const deleteBagItem = async (id) => {
-    setLoading(true);
-    const userId = "67405a48d50a3015702ba9fa";
-    const itemId = id;
-
-    try {
-      const res = await axios.delete(
-        `${API_END_POINT}/removecart/${userId}/${itemId}`
-      );
-
-      if (res.data.success) {
-        dispatch(setCart(res.data.cart));
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   if (loading) return <div>loading....</div>;
   else
@@ -83,12 +63,12 @@ const BagItems = ({ item, quantity }) => {
                 >
                   Size: {item.size} <IoMdArrowDropdown />
                 </div>
-                <div
+                {/* <div
                   className="bg-body-secondary"
                   style={{ padding: "2px", borderRadius: "2px" }}
                 >
                   Qty: {quantity} <IoMdArrowDropdown />
-                </div>
+                </div> */}
               </div>
 
               <div className="price">
@@ -117,11 +97,11 @@ const BagItems = ({ item, quantity }) => {
             type="button"
             className="btn-close float-end"
             aria-label="Close"
-            onClick={() => deleteBagItem(item._id)}
+            onClick={() => removeFromWishlist(dispatch, "", item._id)}
           ></button>
         </div>
       </div>
     );
 };
 
-export default BagItems;
+export default WishlistItems;

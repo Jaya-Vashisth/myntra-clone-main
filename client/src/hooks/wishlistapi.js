@@ -41,10 +41,9 @@ export const isItemInWishlist = (wishList, itemId) => {
 
 export const removeFromWishlist = async (dispatch, userId, itemId) => {
   try {
-    const res = await axios.delete(`${API_END_POINT}/wishlist`, {
-      userId,
-      itemId,
-    });
+    const res = await axios.delete(
+      `${API_END_POINT}/wishlist/${userId}/${itemId}`
+    );
 
     if (res.data.success) {
       dispatch(setwishList(res.data.wishList));

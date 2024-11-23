@@ -7,21 +7,12 @@ import { useEffect } from "react";
 // eslint-disable-next-line no-unused-vars
 import { loadingStatusSliceAction } from "../store/LoadingStatus";
 import LoadingSpinner from "../components/LoadingSpinner";
-import useGetCart from "@/hooks/GetCart";
+import WishlistItems from "@/components/WishlistItems";
 
-const Bag = () => {
-  const { Cart } = useSelector((store) => store.cart);
+const Wishlist = () => {
+  const { wishList } = useSelector((store) => store.wishlists);
 
   const loadingStatus = useSelector((store) => store.loadingStatus); // Access loading status
-
-  let totalPrice = 0;
-  let totalDiscountAmt = 0;
-
-  Cart.products.map((item) => {
-    totalPrice += item.productId.current_price;
-    totalDiscountAmt +=
-      (item.productId.discount_percentage / 100) * item.productId.current_price;
-  });
 
   return (
     <div className="bag clearfix">
@@ -29,23 +20,18 @@ const Bag = () => {
         {loadingStatus.loading ? (
           <LoadingSpinner />
         ) : (
-          Cart.products.map((item, index) => {
+          wishList.products.map((item, index) => {
             return (
-              <BagItems
+              <WishlistItems
                 key={item.productId._id || index}
                 item={item.productId}
-                quantity={item.quantity}
               />
             );
           })
         )}
       </div>
-      <PriceDetails
-        totalPrice={totalPrice.toFixed(2)}
-        totalDiscountAmt={totalDiscountAmt.toFixed(2)}
-      />
     </div>
   );
 };
 
-export default Bag;
+export default Wishlist;

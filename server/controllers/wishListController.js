@@ -38,7 +38,7 @@ const addToWishlist = async (req, res) => {
 const removeFromWishlist = async (req, res) => {
   try {
     // Find the wishlist for the given user
-    const { userId, itemId } = req.body;
+    const { userId, itemId } = req.params;
     console.log(userId);
     const wishlist = await Wishlist.findOne({ userId });
 
