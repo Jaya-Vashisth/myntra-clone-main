@@ -1,26 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  orders: [],
-  currentOrder: null,
+  Orders: [],
+  totalAmount: 0,
 };
 
 const orderSlice = createSlice({
   name: "order",
   initialState,
   reducers: {
-    addOrder: (state, action) => {
-      state.orders.push(action.payload);
-    },
-    setCurrentOrder: (state, action) => {
-      state.currentOrder = action.payload;
-    },
-    clearCurrentOrder: (state) => {
-      state.currentOrder = null;
+    setorders: (state, action) => {
+      state.Orders = action.payload;
     },
   },
 });
 
-export const { addOrder, setCurrentOrder, clearCurrentOrder } =
-  orderSlice.actions;
+export const { setorders } = orderSlice.actions;
 export default orderSlice.reducer;

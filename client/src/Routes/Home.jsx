@@ -3,11 +3,11 @@ import { useSelector } from "react-redux";
 import LoadingSpinner from "../components/LoadingSpinner";
 
 const Home = () => {
-  const items = useSelector((store) => store.items); // Access items from Redux store
+  const { allproducts } = useSelector((store) => store.product); // Access items from Redux store
   const loadingStatus = useSelector((store) => store.loadingStatus); // Access loading status
 
   // Group items by category
-  const groupedItems = items.reduce((acc, item) => {
+  const groupedItems = allproducts.reduce((acc, item) => {
     if (!acc[item.category]) {
       acc[item.category] = [];
     }
@@ -19,7 +19,7 @@ const Home = () => {
     <main className="items">
       {loadingStatus.loading ? (
         <LoadingSpinner /> // Show spinner if loading
-      ) : items.length === 0 ? (
+      ) : allproducts.length === 0 ? (
         <p>No items available.</p> // Show message if no items are available
       ) : (
         Object.keys(groupedItems).map((category) => (

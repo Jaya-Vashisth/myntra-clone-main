@@ -1,7 +1,9 @@
 import { useSelector } from "react-redux";
 
 const PriceDetails = ({ totalPrice, totalDiscountAmt }) => {
-  const bagItems = useSelector((store) => store.bagItems);
+  const { Cart } = useSelector((store) => store.cart);
+
+  const cartItems = Cart.products;
 
   return (
     <div className="price-details border-start-1 border-start border-1 border-dark-subtle float-end">
@@ -13,7 +15,7 @@ const PriceDetails = ({ totalPrice, totalDiscountAmt }) => {
           marginBottom: "15px",
         }}
       >
-        PRICE DETAILS (item {bagItems.length})
+        PRICE DETAILS (Total Item {cartItems.length})
       </h4>
       <h4>
         Total Price

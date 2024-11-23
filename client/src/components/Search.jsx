@@ -6,13 +6,13 @@ import { Link } from "react-router-dom";
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState(""); // State to store the search input
   const dispatch = useDispatch();
-  const items = useSelector((store) => store.items); // Access items from Redux store
+  const { allproducts } = useSelector((store) => store.product); // Access items from Redux store
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
 
   // Filter items by brand (company) or item name based on search query
-  const filteredItems = items.filter((item) => {
+  const filteredItems = allproducts.filter((item) => {
     return (
       item.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.item_name.toLowerCase().includes(searchQuery.toLowerCase())

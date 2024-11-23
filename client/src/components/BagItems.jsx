@@ -2,16 +2,26 @@
 import { PiKeyReturn } from "react-icons/pi";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { useDispatch } from "react-redux";
-import { bagAndWishlistMarkerAction } from "../store/bagAndWishlistMarker";
-import { bagItemsAction } from "../store/bagSlice";
+import { setCart } from "../store/cartSlice";
+import axios from "axios";
+import { API_END_POINT } from "../../utils/constants.js";
 
-const BagItems = ({ item }) => {
+const BagItems = ({ item, quantity }) => {
   const dispatch = useDispatch();
 
   // Remove item from the bag and update the wishlist marker state
-  const deleteBagItem = (id) => {
-    dispatch(bagItemsAction.deleteBagItem(id)); // Ensure deleteBagItem is correctly defined in the slice
-    dispatch(bagAndWishlistMarkerAction.markbag({ item, mark: false })); // Ensure markbag is correctly defined
+  const deleteBagItem = async (id) => {
+    try {
+      const res = await axios.delete(`${API_END_POINT}/removecart/`, {
+        userId: "",
+        itemId: id,
+      });
+      if (res.data.success) {
+        dispatch(setCart(res.data.cart));
+      }
+    } catch (error) {
+      console.log("error in removing from car");
+    }
   };
 
   return (
@@ -66,7 +76,7 @@ const BagItems = ({ item }) => {
                 className="bg-body-secondary"
                 style={{ padding: "2px", borderRadius: "2px" }}
               >
-                Qty: {item.quantity} <IoMdArrowDropdown />
+                Qty: {quantity} <IoMdArrowDropdown />
               </div>
             </div>
 

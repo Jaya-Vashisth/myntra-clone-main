@@ -25,8 +25,12 @@ const addToBag = async (req, res) => {
 //all items
 const getInitialItems = async (req, res) => {
   try {
-    const initialItems = await Item.find({});
-    return res.status(200).json(initialItems);
+    const products = await Item.find({});
+    return res.status(200).json({
+      success: true,
+      message: "items fetched successfully",
+      products,
+    });
   } catch (error) {
     console.log("error occured : /n", error);
   }

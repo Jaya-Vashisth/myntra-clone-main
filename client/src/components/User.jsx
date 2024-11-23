@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 const User = () => {
   //   const { user } = useSelector((store) => store.auth);
 
-  const bagItems = useSelector((store) => store.bagItems);
+  // const bagItems = useSelector((store) => store.bagItems);
 
   return (
     <ul className="navbar-nav me-auto mb-2 mb-lg-0 float-end">
@@ -29,7 +29,7 @@ const User = () => {
           <BsHandbag />
           Bag
           <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            {bagItems.length}
+            {/* {bagItems.length} */}
             <span className="visually-hidden">unread messages</span>
           </span>
         </Link>

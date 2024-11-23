@@ -7,19 +7,19 @@ import { useEffect } from "react";
 // eslint-disable-next-line no-unused-vars
 import { loadingStatusSliceAction } from "../store/LoadingStatus";
 import LoadingSpinner from "../components/LoadingSpinner";
-import { bagItemsAction } from "../store/bagSlice";
 
 const Bag = () => {
-  const bagItems = useSelector((store) => store.bagItems);
+  const { Cart } = useSelector((store) => store.cart);
+
   const loadingStatus = useSelector((store) => store.loadingStatus); // Access loading status
-  const dispatch = useDispatch();
 
   let totalPrice = 0;
   let totalDiscountAmt = 0;
 
-  bagItems.map((item) => {
-    totalPrice += item.current_price;
-    totalDiscountAmt += (item.discount_percentage / 100) * item.current_price;
+  Cart.products.map((item) => {
+    totalPrice += item.productId.current_price;
+    totalDiscountAmt +=
+      (item.productId.discount_percentage / 100) * item.productId.current_price;
   });
 
   return (
@@ -28,8 +28,14 @@ const Bag = () => {
         {loadingStatus.loading ? (
           <LoadingSpinner />
         ) : (
-          bagItems.map((item) => {
-            return <BagItems key={item._id} item={item} />;
+          Cart.products.map((item) => {
+            return (
+              <BagItems
+                key={item.productId._id}
+                item={item.productId}
+                quantity={item.quantity}
+              />
+            );
           })
         )}
       </div>

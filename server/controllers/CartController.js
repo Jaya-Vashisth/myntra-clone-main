@@ -58,13 +58,17 @@ const removeFromCart = async (req, res) => {
     );
 
     if (productIndex === -1) {
-      return res.status(404).json({ message: "Product not found in cart" });
+      return res
+        .status(404)
+        .json({ success: false, message: "Product not found in cart" });
     }
 
     cart.products.splice(productIndex, 1); // Remove product from cart
 
     await cart.save();
-    res.status(200).json({ message: "Item removed from cart", cart });
+    res
+      .status(200)
+      .json({ success: true, message: "Item removed from cart", cart });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });
@@ -79,10 +83,13 @@ const viewCart = async (req, res) => {
     const cart = await Cart.findOne({ userId }).populate("products.productId");
 
     if (!cart) {
-      return res.status(404).json({ message: "Cart not found" });
+      return res.status(404).json({
+        success: false,
+        message: "Cart not found",
+      });
     }
 
-    res.status(200).json({ cart });
+    res.status(200).json({ success: true, cart });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });

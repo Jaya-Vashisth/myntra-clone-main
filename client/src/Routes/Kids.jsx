@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Item from "../components/Item";
 import LoadingSpinner from "../components/LoadingSpinner";
 
-const Men = () => {
-  const items = useSelector((store) => store.items);
+const Kids = () => {
+  const { allproducts } = useSelector((store) => store.product);
   const loadingStatus = useSelector((store) => store.loadingStatus);
   const [sortOption, setSortOption] = useState("default");
   const [priceRange, setPriceRange] = useState([0, 0]); // [min, max]
 
-  const menItems = items.filter((item) => item.category === "Kids");
+  const menItems = allproducts.filter((item) => item.category === "Kids");
 
   const maxPrice = menItems.reduce(
     (max, item) => Math.max(max, item.current_price),
@@ -104,4 +104,4 @@ const Men = () => {
   );
 };
 
-export default Men;
+export default Kids;

@@ -1,20 +1,41 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { FaStar } from "react-icons/fa6";
 import { IoIosHeartEmpty } from "react-icons/io";
 import { BsHandbag } from "react-icons/bs";
+import axios from "axios";
+import { API_END_POINT } from "../../utils/constants";
+import { setCart } from "@/store/cartSlice";
+
 const ProductDetail = () => {
   const { id } = useParams(); // Get the product id from the URL
   const [product, setProduct] = useState(null);
-  const items = useSelector((store) => store.items);
+  const { allproducts } = useSelector((store) => store.product);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    const productDetails = items.find((item) => item._id === id); // Find the product based on id
+    const productDetails = allproducts.find((item) => item._id === id); // Find the product based on id
     setProduct(productDetails); // Set product state
-  }, [id, items]); // Dependency array ensures this runs when `id` or `items` change
+  }, [id, allproducts, dispatch]); // Dependency array ensures this runs when `id` or `items` change
 
   if (!product) return <div>Loading...</div>; // Show loading state
+
+  const addToBag = async () => {
+    try {
+      const res = await axios.post(`${API_END_POINT}/addcart`, {
+        userId: "67405a48d50a3015702ba9fa",
+        itemId: id,
+        quantity: 1,
+      });
+      if (res.data.success) {
+        dispatch(setCart(res.data.cart));
+      }
+    } catch (error) {
+      console.log("error in removing from car");
+    }
+  };
   return (
     <div className="container">
       <div className="card">
@@ -118,6 +139,7 @@ const ProductDetail = () => {
                   className="add-to-cart btn btn-default"
                   type="button"
                   style={{ backgroundColor: "#F13AB1", color: "white" }}
+                  onClick={() => addToBag()}
                 >
                   add to bag
                 </button>

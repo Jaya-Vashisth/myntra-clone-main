@@ -18,6 +18,7 @@ const {
 const cartController = require("../controllers/CartController.js");
 const isAuthenticated = require("../middlewares/isAuthenticate.js");
 const orderController = require("../controllers/orderController.js");
+const wishlistController = require("../controllers/wishListController.js");
 
 ////////////////////////////// Products route/////////////////////////
 router.get("/items", getInitialItems);
@@ -42,6 +43,13 @@ router.get("/viewcart/:userId", cartController.viewCart);
 router.put("/updatecart", cartController.updateCartQuantity);
 router.delete("/clearcart", cartController.clearCart);
 
+/////////////////// wishlist route //////////////
+router.post("/wishlist", wishlistController.addToWishlist);
+// Remove item from wishlist
+router.delete("/wishlist", wishlistController.removeFromWishlist);
+// Get wishlist
+router.get("/wishlist/:userId", wishlistController.getWishlist);
+
 //////////////////// orders route /////////////////////////////////////////
 
 router.post("/createOrder", orderController.createOrder);
@@ -52,6 +60,6 @@ router.get("/:orderId", orderController.getOrderById);
 // Update order status (shipped, delivered, canceled)
 router.put("/update-status", orderController.updateOrderStatus);
 // Cancel/delete an order
-router.delete("/:orderId", orderController.deleteOrder);
+router.delete("/order/:orderId", orderController.deleteOrder);
 
 module.exports = { router };
